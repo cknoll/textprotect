@@ -14,3 +14,9 @@ Long story short: I created this project for my parents.
 
 
 
+
+Issues:
+
+- make a backup of the encrypted-files, to prevent complete data loss in case of saving an empty file
+- autodetect the language, refactor the strings to a separate module
+

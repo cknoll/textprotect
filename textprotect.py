@@ -12,7 +12,7 @@ import subprocess
 import string
 import random
 
-from ipydex import IPS
+# from ipydex import IPS
 
 # this is not part of the standard library but available via pip
 # or apt (python3-gnupg)
@@ -70,8 +70,9 @@ def random_path(suffix=""):
     return os.path.join(rnd_base_path, rnd_string + suffix)
 
 def edit_file(path):
+    devnull = subprocess.DEVNULL
     try:
-        res = subprocess.check_output(["kate", "-n", path])
+        res = subprocess.check_output(["kate", "-n", path], stderr=devnull)
     except subprocess.CalledProcessError:
         dialog(msg_edit_fail)
         exit()
@@ -105,7 +106,6 @@ def open_encrypted_file(pw=None, new=False):
             plainfile.write(msg_new_file_content)
     else:
         # decrypt data
-        print("decrypt data")
         with open(tpt_path, "rb") as thefile:
             result = gpg.decrypt_file(thefile, passphrase=pw,
                                       output=path)
